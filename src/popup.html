@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rooom Token View</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Rooom Token View</h1>
+        <p>AI使用量をひと目で確認</p>
+      </div>
+      <button id="settingsButton" class="iconButton" title="設定">設定</button>
+    </header>
+
+    <section class="card" id="chatgptCard">
+      <div class="cardTitle">
+        <div><span class="dot"></span><strong>ChatGPT</strong></div>
+        <span id="chatgptPlan" class="pill">Plus</span>
+      </div>
+      <div class="metricRow">
+        <div>
+          <span class="label">残り目安</span>
+          <div class="big" id="chatgptRemaining">--%</div>
+        </div>
+        <div class="right">
+          <span class="label">直近3時間</span>
+          <div id="chatgptCount">-- / --件</div>
+        </div>
+      </div>
+      <div class="bar"><span id="chatgptBar"></span></div>
+      <div class="sub" id="chatgptReset">ローカル送信履歴から計算</div>
+    </section>
+
+    <section class="card" id="claudeCard">
+      <div class="cardTitle">
+        <div><span class="dot"></span><strong>Claude</strong></div>
+        <button id="syncClaude" class="smallButton">同期</button>
+      </div>
+      <div class="metricRow">
+        <div>
+          <span class="label">5時間枠 残り</span>
+          <div class="big" id="claudeSession">--%</div>
+        </div>
+        <div class="right">
+          <span class="label">週間 残り</span>
+          <div id="claudeWeekly">--%</div>
+        </div>
+      </div>
+      <div class="bar"><span id="claudeBar"></span></div>
+      <div class="sub" id="claudeReset">「同期」で公式Usageを読み取ります</div>
+    </section>
+
+    <div class="notice">
+      個人プランは固定の「残りトークン数」ではありません。ChatGPTは残り目安、Claudeは公式Usageの残り率を表示します。
+    </div>
+
+    <footer>
+      <button id="openChatGPT" class="linkButton">ChatGPTを開く</button>
+      <button id="openClaudeUsage" class="linkButton">Claude Usageを開く</button>
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
