@@ -11,20 +11,46 @@
     <header>
       <div>
         <h1>Rooom Token View</h1>
-        <p>AI使用量をひと目で確認</p>
+        <p>GPT Work / ChatGPT / Claude 使用量</p>
       </div>
       <button id="settingsButton" class="iconButton" title="設定">設定</button>
     </header>
 
+    <section class="card priority" id="workCard">
+      <div class="cardTitle">
+        <div><span class="dot"></span><strong>GPT Work</strong></div>
+        <div class="titleActions">
+          <span class="pill">Codex共通枠</span>
+          <button id="syncWork" class="smallButton primaryButton">同期</button>
+        </div>
+      </div>
+      <div class="metricRow">
+        <div>
+          <span class="label">5時間枠 残り</span>
+          <div class="big" id="workFiveHour">--%</div>
+        </div>
+        <div class="right">
+          <span class="label">週間枠 残り</span>
+          <div class="medium" id="workWeekly">--%</div>
+        </div>
+      </div>
+      <div class="bar"><span id="workBar"></span></div>
+      <div class="sub" id="workReset">「同期」で公式Usage Dashboardを読み取ります</div>
+      <div class="detailLine">
+        <span id="workCredits">追加クレジット: --</span>
+        <span id="workSyncedAt">未同期</span>
+      </div>
+    </section>
+
     <section class="card" id="chatgptCard">
       <div class="cardTitle">
-        <div><span class="dot"></span><strong>ChatGPT</strong></div>
+        <div><span class="dot"></span><strong>通常ChatGPT</strong></div>
         <span id="chatgptPlan" class="pill">Plus</span>
       </div>
       <div class="metricRow">
         <div>
           <span class="label">残り目安</span>
-          <div class="big" id="chatgptRemaining">--%</div>
+          <div class="big secondaryBig" id="chatgptRemaining">--%</div>
         </div>
         <div class="right">
           <span class="label">直近3時間</span>
@@ -43,7 +69,7 @@
       <div class="metricRow">
         <div>
           <span class="label">5時間枠 残り</span>
-          <div class="big" id="claudeSession">--%</div>
+          <div class="big secondaryBig" id="claudeSession">--%</div>
         </div>
         <div class="right">
           <span class="label">週間 残り</span>
@@ -55,12 +81,13 @@
     </section>
 
     <div class="notice">
-      個人プランは固定の「残りトークン数」ではありません。ChatGPTは残り目安、Claudeは公式Usageの残り率を表示します。
+      GPT WorkはWork専用枠ではなく、Codex等と共有するagentic usage枠です。上の5時間・週間のうち低い方が実質的な余力の目安です。
     </div>
 
     <footer>
-      <button id="openChatGPT" class="linkButton">ChatGPTを開く</button>
-      <button id="openClaudeUsage" class="linkButton">Claude Usageを開く</button>
+      <button id="openWorkUsage" class="linkButton primaryLink">Work Usage</button>
+      <button id="openChatGPT" class="linkButton">ChatGPT</button>
+      <button id="openClaudeUsage" class="linkButton">Claude Usage</button>
     </footer>
   </main>
   <script src="popup.js"></script>

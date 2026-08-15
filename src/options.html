@@ -9,7 +9,7 @@
     h1 { font-size: 24px; }
     .box { border: 1px solid #ddd; border-radius: 12px; padding: 18px; margin: 18px 0; }
     label { display: block; margin: 12px 0; }
-    input { display: block; width: 100%; max-width: 420px; padding: 8px; margin-top: 5px; }
+    input { display: block; width: 100%; max-width: 520px; padding: 8px; margin-top: 5px; }
     button { padding: 9px 14px; border: 0; border-radius: 8px; cursor: pointer; }
     .danger { background: #eee; }
     p { line-height: 1.6; color: #666; }
@@ -18,17 +18,20 @@
 </head>
 <body>
   <h1>Rooom Token View 設定</h1>
-  <p>ChatGPT個人プランには固定トークン残高の公式APIがないため、送信数をブラウザ内で記録して残りを目安表示します。上限が変わった場合はここで調整できます。</p>
+  <p>GPT WorkはCodex等と共有するagentic usage枠を公式Usage Dashboardから読み取ります。通常ChatGPTは固定トークン残高の公式APIがないため、送信数をブラウザ内で記録して残りを目安表示します。</p>
 
   <div class="box">
     <label>ChatGPT プラン表示
       <input id="planLabel" value="ChatGPT Plus">
     </label>
-    <label>ChatGPT 参考上限（件）
+    <label>通常ChatGPT 参考上限（件）
       <input id="cap" type="number" min="1" step="1" value="160">
     </label>
-    <label>集計時間（時間）
+    <label>通常ChatGPT 集計時間（時間）
       <input id="windowHours" type="number" min="1" step="1" value="3">
+    </label>
+    <label>GPT Work / Codex Usage URL
+      <input id="workUrl" type="url" value="https://chatgpt.com/codex/settings/usage">
     </label>
     <label>Claude Usage URL
       <input id="claudeUrl" type="url" value="https://claude.ai/settings/usage">
@@ -39,7 +42,7 @@
   <div class="box">
     <strong>プライバシー</strong>
     <p>この拡張はChatGPT/Claudeの認証Cookieや会話本文を外部サーバーへ送信しません。計測データはChromeのローカルストレージだけに保存します。</p>
-    <button id="reset" class="danger">ChatGPT計測履歴を削除</button>
+    <button id="reset" class="danger">ChatGPT / Work 計測履歴を削除</button>
   </div>
 
   <script src="options.js"></script>

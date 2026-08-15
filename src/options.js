@@ -4,6 +4,7 @@ const DEFAULT_SETTINGS = {
   chatgptThreeHourCap: 160,
   chatgptWindowHours: 3,
   planLabel: 'ChatGPT Plus',
+  workUsageUrl: 'https://chatgpt.com/codex/settings/usage',
   claudeUsageUrl: 'https://claude.ai/settings/usage'
 };
 
@@ -15,14 +16,19 @@ async function load() {
   $('planLabel').value = s.planLabel;
   $('cap').value = s.chatgptThreeHourCap;
   $('windowHours').value = s.chatgptWindowHours;
+  $('workUrl').value = s.workUsageUrl;
   $('claudeUrl').value = s.claudeUsageUrl;
 }
 
 $('save').addEventListener('click', async () => {
+  const { settings: existing } = await chrome.storage.local.get('settings');
   const settings = {
+    ...DEFAULT_SETTINGS,
+    ...(existing || {}),
     planLabel: $('planLabel').value.trim() || 'ChatGPT',
     chatgptThreeHourCap: Math.max(1, Number($('cap').value) || 160),
     chatgptWindowHours: Math.max(1, Number($('windowHours').value) || 3),
+    workUsageUrl: $('workUrl').value.trim() || DEFAULT_SETTINGS.workUsageUrl,
     claudeUsageUrl: $('claudeUrl').value.trim() || DEFAULT_SETTINGS.claudeUsageUrl
   };
   await chrome.storage.local.set({ settings });
@@ -32,9 +38,9 @@ $('save').addEventListener('click', async () => {
 });
 
 $('reset').addEventListener('click', async () => {
-  await chrome.storage.local.remove(['chatgptEvents', 'chatgptVisibleLimit']);
+  await chrome.storage.local.remove(['chatgptEvents', 'chatgptVisibleLimit', 'chatgptWorkUsage']);
   await chrome.runtime.sendMessage({ type: 'refreshBadge' }).catch(() => {});
-  $('status').textContent = '履歴を削除しました';
+  $('status').textContent = 'ChatGPT / Work の計測履歴を削除しました';
 });
 
 load();
