@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rooom Token View 設定</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 680px; margin: 40px auto; padding: 0 20px; color: #202020; }
+    h1 { font-size: 24px; }
+    .box { border: 1px solid #ddd; border-radius: 12px; padding: 18px; margin: 18px 0; }
+    label { display: block; margin: 12px 0; }
+    input { display: block; width: 100%; max-width: 420px; padding: 8px; margin-top: 5px; }
+    button { padding: 9px 14px; border: 0; border-radius: 8px; cursor: pointer; }
+    .danger { background: #eee; }
+    p { line-height: 1.6; color: #666; }
+    #status { margin-left: 8px; color: #356b4c; }
+  </style>
+</head>
+<body>
+  <h1>Rooom Token View 設定</h1>
+  <p>ChatGPT個人プランには固定トークン残高の公式APIがないため、送信数をブラウザ内で記録して残りを目安表示します。上限が変わった場合はここで調整できます。</p>
+
+  <div class="box">
+    <label>ChatGPT プラン表示
+      <input id="planLabel" value="ChatGPT Plus">
+    </label>
+    <label>ChatGPT 参考上限（件）
+      <input id="cap" type="number" min="1" step="1" value="160">
+    </label>
+    <label>集計時間（時間）
+      <input id="windowHours" type="number" min="1" step="1" value="3">
+    </label>
+    <label>Claude Usage URL
+      <input id="claudeUrl" type="url" value="https://claude.ai/settings/usage">
+    </label>
+    <button id="save">保存</button><span id="status"></span>
+  </div>
+
+  <div class="box">
+    <strong>プライバシー</strong>
+    <p>この拡張はChatGPT/Claudeの認証Cookieや会話本文を外部サーバーへ送信しません。計測データはChromeのローカルストレージだけに保存します。</p>
+    <button id="reset" class="danger">ChatGPT計測履歴を削除</button>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
